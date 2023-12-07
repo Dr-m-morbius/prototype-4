@@ -9,7 +9,7 @@ public class playercontroler : MonoBehaviour
 
     private GameObject focalPoint;
     private Rigidbody playerRb;
-    private float powerupStrength = 100.0f;
+    private float powerupStrength = 20.0f;
     public GameObject powerindicator;
     
     // Start is called before the first frame update
@@ -48,13 +48,15 @@ public class playercontroler : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-      if(collision.gameObject.CompareTag("enemy") && haspower)
+
+      if(collision.gameObject.CompareTag("Enemy") && haspower)
         {
             Rigidbody enemyRigidBody = collision.gameObject.GetComponent<Rigidbody>();
             Vector3 awayFromPlayer = (collision.gameObject.transform.position - transform.position);
 
-            Debug.Log("Collided with: " + collision.gameObject.name + " with power set to " + haspower);
             enemyRigidBody.AddForce(awayFromPlayer * powerupStrength, ForceMode.Impulse);
+            Debug.Log("Collided with: " + collision.gameObject.name + " with power set to " + haspower);
+            
         }  
     }
 }
